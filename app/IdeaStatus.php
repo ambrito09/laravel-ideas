@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 enum IdeaStatus: string
@@ -10,10 +12,19 @@ enum IdeaStatus: string
 
     public function label(): string
     {
-      return match ($this) {
-        self::PENDING => 'Pending',
-        self::IN_PROGRESS => 'In Progress',
-        self::COMPLETED => 'Completed',
-      };
+        return match ($this) {
+            self::PENDING => 'Pending',
+            self::IN_PROGRESS => 'In Progress',
+            self::COMPLETED => 'Completed',
+        };
+    }
+
+    public function statusIcon(): string
+    {
+        return match ($this) {
+            self::PENDING => '⏳',
+            self::IN_PROGRESS => '🚧',
+            self::COMPLETED => '✅',
+        };
     }
 }
