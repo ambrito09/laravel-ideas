@@ -45,3 +45,7 @@ button {
     background: var(--color-red);
     color: white;
 }
+
+.btn-red:hover {
+    background: color-mix(in srgb, black 10%, var(--color-red));
+}

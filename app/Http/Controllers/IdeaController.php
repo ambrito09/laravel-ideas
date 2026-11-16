@@ -55,9 +55,11 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Idea $idea): string
+    public function show(Idea $idea)
     {
-        return 'Displaying idea: '.$idea->title;
+        return view('ideas.show', [
+            'idea' => $idea,
+        ]);
     }
 
     /**
@@ -79,8 +81,10 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Idea $idea): void
+    public function destroy(Idea $idea)
     {
-        //
+        $idea->delete();
+
+        return redirect()->route('ideas.index');
     }
 }

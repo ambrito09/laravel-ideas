@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/ideas');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/ideas', [IdeaController::class, 'index']);
+    Route::get('/ideas', [IdeaController::class, 'index'])->name('ideas.index');
     Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
+    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
     Route::delete('/logout', [SessionsController::class, 'destroy']);
 });
 
