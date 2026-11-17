@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\StepController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', fn () => view('welcome'));
@@ -15,6 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
     Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
     Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
+
+    Route::patch('/steps/{step}', [StepController::class,'update'])->name('steps.update');
+
     Route::delete('/logout', [SessionsController::class, 'destroy']);
 });
 

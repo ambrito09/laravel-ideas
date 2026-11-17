@@ -27,7 +27,7 @@ class Idea extends Model
 
     public function steps(): HasMany
     {
-        return $this->hasMany(Step::class);
+        return $this->hasMany(Step::class)->orderBy('id');
     }
 
     public static function ideasCount(User $user): Collection
