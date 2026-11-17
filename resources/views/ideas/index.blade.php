@@ -18,6 +18,7 @@
             <button
                 x-data
                 @click="$dispatch('open-modal', 'create-idea')"
+                data-test="create-idea-button"
                 class="btn btn-outlined">
                     New Idea
             </button>

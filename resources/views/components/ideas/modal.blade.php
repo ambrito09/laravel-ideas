@@ -12,6 +12,7 @@
                         <button
                             type="button"
                             @click="status = @js($status->value)"
+                            data-test="button-status-{{ $status->value }}"
                             class="btn flex-1 h-10"
                             :class="status === @js($status->value) ? '' : 'btn-outlined'"
                         >
@@ -25,7 +26,7 @@
             <x-form.field label="Description" name="description" type="textarea" />
             <div class="flex justify-end space-x-4">
                 <button type="button" @click="$dispatch('close-modal', '{{ $name }}')" class="btn btn-outlined">Cancel</button>
-                <button type="submit" class="btn">Create</button>
+                <button type="submit" class="btn" data-test="button-modal-create">Create</button>
             </div>
         </div>
     </form>
