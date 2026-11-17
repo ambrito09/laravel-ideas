@@ -5,14 +5,22 @@
             <p class="text-muted-foreground text-sm mt-2">Share your ideas with the community.</p>
         </header>
 
-        <div>
-            <a href="/ideas" class="btn btn-outlined">All <span class="text-xs pl-4">{{ $statusCount['all'] ?? 0 }}</span></a>
-            @foreach (App\IdeaStatus::cases() as $status)
-                <a href="/ideas?status={{ $status->value }}" class="btn {{ request()->status === $status->value ? '' : 'btn-outlined' }}">
-                    {{ $status->label() }}
-                    <span class="text-xs pl-4">{{ $statusCount[$status->value] ?? 0 }}</span>
-                </a>
-            @endforeach
+        <div class="flex justify-between items-center">
+            <div>
+                <a href="/ideas" class="btn btn-outlined">All <span class="text-xs pl-4">{{ $statusCount['all'] ?? 0 }}</span></a>
+                @foreach (App\IdeaStatus::cases() as $status)
+                    <a href="/ideas?status={{ $status->value }}" class="btn {{ request()->status === $status->value ? '' : 'btn-outlined' }}">
+                        {{ $status->label() }}
+                        <span class="text-xs pl-4">{{ $statusCount[$status->value] ?? 0 }}</span>
+                    </a>
+                @endforeach
+            </div>
+            <button
+                x-data
+                @click="$dispatch('open-modal', 'create-idea')"
+                class="btn btn-outlined">
+                    New Idea
+            </button>
         </div>
 
         <div class="mt-10 text-muted-foreground">
@@ -33,5 +41,8 @@
                 @endforelse
             </div>
         </div>
+
+        <!-- Modal -->
+        <x-ideas.modal name="create-idea" title="New Idea" />
     </div>
 </x-layout>

@@ -12,12 +12,12 @@
         <x-layout.nav />
         @session('success')
             <div
-            x-data="{show: true}"
-            x-init="setTimeout(()=> show = false, 3000)"
-            x-show="show"
-            x-transition.opacity.duration.600ms
-            class="fixed top-24 right-4 bg-primary text-white/75 px-6 py-3 rounded-xl shadow-lg">
-            {{ session('success') }}</div>
+                x-data="{show: true}"
+                x-init="setTimeout(()=> show = false, 3000)"
+                x-show="show"
+                x-transition.opacity.duration.600ms
+                class="fixed top-24 right-4 bg-primary text-white/75 px-6 py-3 rounded-xl shadow-lg">
+                {{ session('success') }}</div>
         @endsession
         <main class="max-w-7xl mx-auto px-6 py-4">
             {{ $slot }}

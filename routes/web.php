@@ -12,6 +12,7 @@ Route::redirect('/', '/ideas');
 
 Route::middleware('auth')->group(function () {
     Route::get('/ideas', [IdeaController::class, 'index'])->name('ideas.index');
+    Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
     Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
     Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
     Route::delete('/logout', [SessionsController::class, 'destroy']);
