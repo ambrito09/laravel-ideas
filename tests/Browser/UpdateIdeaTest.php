@@ -27,7 +27,7 @@ test('it updates an idea', function () {
         'title' => 'My First Idea',
         'status' => 'in_progress',
         'description' => 'Description',
-        'links' => [ $idea->links[0], 'http://example.com' ],
+        'links' => [$idea->links[0], 'http://example.com'],
     ]);
 
     expect($idea->steps)->toHaveCount(1);

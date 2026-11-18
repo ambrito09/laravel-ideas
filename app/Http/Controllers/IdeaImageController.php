@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class IdeaImageController extends Controller
@@ -15,6 +14,7 @@ class IdeaImageController extends Controller
     {
         Storage::disk('public')->delete($idea->image_path);
         $idea->update(['image_path' => null]);
+
         return back();
     }
 }
