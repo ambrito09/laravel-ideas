@@ -12,6 +12,7 @@
                 <a href="/register" class="btn">Register</a>
             @endguest
             @auth
+                <a href="{{ route('profile.edit') }}">My Profile</a>
                 <form action="/logout" method="post">
                     @csrf
                     @method('delete')
