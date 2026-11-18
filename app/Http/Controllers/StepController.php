@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Step;
@@ -13,7 +15,7 @@ class StepController extends Controller
     public function update(Request $request, Step $step)
     {
         // auth
-        $step->update([ 'completed' => !$step->completed ]);
+        $step->update(['completed' => ! $step->completed]);
 
         return back();
     }
@@ -21,7 +23,7 @@ class StepController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Step $step)
+    public function destroy(Step $step): void
     {
         //
     }

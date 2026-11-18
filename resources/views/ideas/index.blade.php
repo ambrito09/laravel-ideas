@@ -28,6 +28,11 @@
             <div class="grid md:grid-cols-2 gap-6">
                 @forelse ($ideas as $idea)
                     <x-idea-card href="/ideas/{{ $idea->id }}">
+                        @if ($idea->image_path)
+                            <div class="mb-4 -mx-4 -mt-4 rounded-t-lg overflow-hidden">
+                                <img src="{{ asset('storage/' . $idea->image_path) }}" alt="Idea image" class="w-full h-auto object-cover" />
+                            </div>
+                        @endif
                         <h3 class="text-foreground text-lg">
                             <span class="inline-block px-2 text-xl font-medium">
                                 {{ $idea->status->statusIcon() }}

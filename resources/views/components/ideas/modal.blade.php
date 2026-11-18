@@ -1,7 +1,17 @@
 @props([ 'name', 'title' => 'Ideas'])
 
 <x-modal :name="$name" :title="$title">
-    <form x-data="{status: 'pending', newLink: '', links: [], newStep: '', steps: [] }" action="{{ route('ideas.store') }}" method="POST">
+    <form x-data="{
+            status: 'pending',
+            newLink: '',
+            links: [],
+            newStep: '',
+            steps: [],
+            hasImage: false
+        }"
+        action="{{ route('ideas.store') }}"
+        method="POST"
+        x-bind:enctype="hasImage ? 'multipart/form-data' : false">
         @csrf
         <div class="space-y-4">
             <x-form.field label="Title" name="title" type="text" required />
@@ -24,6 +34,11 @@
                 <x-form.error name="status"/>
             </div>
             <x-form.field label="Description" name="description" type="textarea" />
+            <div class="space-y-2">
+                <label for="image" class="label">Featured Image</label>
+                <input type="file" name="image" id="image" accept="image/*" @change="hasImage = $event.target.files.length > 0" >
+                <x-form.error name="image"></x-form>
+            </div>
             <div>
                 <fieldset class="space-y-3">
                     <legend class="label">Steps</legend>

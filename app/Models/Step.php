@@ -13,6 +13,7 @@ class Step extends Model
     use HasFactory;
 
     protected $fillable = [];
+
     protected $attributes = [
         'completed' => false,
     ];
