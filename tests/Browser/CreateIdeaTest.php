@@ -17,15 +17,19 @@ test('it creates a new idea', function () {
         ->click('@button-add-link')
         ->fill('@input-new-link', 'http://laravel.com')
         ->click('@button-add-link')
+        ->fill('@input-new-step', 'Step 1')
+        ->click('@button-add-step')
         ->click('@button-modal-create')
         ->assertPathIs('/ideas');
 
     expect($user->ideas()->count())->toBe(1);
 
-    expect($user->ideas()->first())->toMatchArray([
+    expect($idea = $user->ideas()->first())->toMatchArray([
         'title' => 'My First Idea',
         'status' => 'in_progress',
         'description' => 'Description',
         'links' => ['http://example.com', 'http://laravel.com'],
     ]);
+
+    expect($idea->steps)->toHaveCount(1);
 });
