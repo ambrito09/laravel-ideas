@@ -5,8 +5,8 @@ use App\Notifications\EmailChanged;
 use Illuminate\Support\Facades\Notification;
 
 it('requires authentication', function () {
-  $this->get(route('profile.edit'))
-    ->assertRedirect('/login');
+    $this->get(route('profile.edit'))
+        ->assertRedirect('/login');
 });
 
 it('edits a profile', function () {
@@ -21,8 +21,8 @@ it('edits a profile', function () {
         ->assertSee('Profile updated successfully!');
 
     expect($user->fresh())->toMatchArray([
-        'name'=> 'My Name',
-        'email'=> 'user@example.com',
+        'name' => 'My Name',
+        'email' => 'user@example.com',
     ]);
 });
 
@@ -41,7 +41,5 @@ it('notifies the original email if changed', function () {
         ->click('Update')
         ->assertSee('Profile updated successfully!');
 
-    Notification::assertSentOnDemand(EmailChanged::class, function(EmailChanged $notification, $routes, $notifiable) use ($originalEmail) {
-        return $notifiable->routes['mail'] === $originalEmail;
-    });
+    Notification::assertSentOnDemand(EmailChanged::class, fn (EmailChanged $notification, $routes, $notifiable) => $notifiable->routes['mail'] === $originalEmail);
 });
