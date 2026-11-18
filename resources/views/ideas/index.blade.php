@@ -49,6 +49,6 @@
         </div>
 
         <!-- Modal -->
-        <x-ideas.modal name="create-idea" title="New Idea" />
+        <x-ideas.modal />
     </div>
 </x-layout>

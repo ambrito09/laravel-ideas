@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\IdeaImageController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StepController;
@@ -15,7 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/ideas', [IdeaController::class, 'index'])->name('ideas.index');
     Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
     Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show')->can('workWith', 'idea');
+    Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.update')->can('workWith', 'idea');
     Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->can('workWith', 'idea');
+    Route::delete('/ideas/{idea}/image', [IdeaImageController::class,'destroy'])->name('ideas.image.destroy')->can('workWith', 'idea');
 
     Route::patch('/steps/{step}', [StepController::class, 'update'])->name('steps.update');
 

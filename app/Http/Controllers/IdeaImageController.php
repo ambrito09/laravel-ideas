@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Idea;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class IdeaImageController extends Controller
+{
+    /**
+     * Remove image associated to an Idea
+     */
+    public function destroy(Idea $idea)
+    {
+        Storage::disk('public')->delete($idea->image_path);
+        $idea->update(['image_path' => null]);
+        return back();
+    }
+}

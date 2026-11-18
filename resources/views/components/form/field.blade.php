@@ -1,4 +1,4 @@
-@props([ 'name', 'label', 'type' => 'text' ])
+@props([ 'name', 'label', 'type' => 'text', 'value' => null ])
 <div class="space-y-2">
   <label for="{{$name}}" class="label">{{$label}}</label>
   @if($type === 'textarea')

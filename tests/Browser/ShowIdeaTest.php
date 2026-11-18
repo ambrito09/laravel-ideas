@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
 use App\Models\Idea;
+use App\Models\User;
 
-test("requires authentication", function () {
+test('requires authentication', function () {
     $idea = Idea::factory()->create();
 
     $this->get(route('ideas.show', $idea))->assertRedirectToRoute('login');
