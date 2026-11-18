@@ -6,7 +6,7 @@
             newLink: '',
             links: @js(old('links', $idea->links)),
             newStep: '',
-            steps: @js(old('steps', $idea->steps->map(fn ($step) => $step->description))),
+            steps: @js(old('steps', $idea->steps->map->only(['id', 'description', 'completed']))),
             hasImage: false
         }"
         action="{{ $idea->exists ? route('ideas.update', $idea) : route('ideas.store') }}"
@@ -52,9 +52,10 @@
                 <fieldset class="space-y-3">
                     <legend class="label">Steps</legend>
 
-                    <template x-for="(step, index) in steps">
+                    <template x-for="(step, index) in steps" :key="step.id || index">
                         <div class="flex gap-x-2 items-center space-y-2">
-                            <input type="text" name="steps[]" x-model="step" class="input" readonly />
+                            <input type="text" :name="`steps[${index}][description]`" x-model="step.description" class="input" readonly />
+                            <input type="hidden" :name="`steps[${index}][completed]`" x-model="step.completed ? 1 : 0" class="input" readonly />
                             <button type="button" @click="steps.splice(index, 1)" aria-label="Remove Step">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff0000" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -70,7 +71,7 @@
 
                     <div class="flex gap-x-2 items-center space-y-2">
                         <input x-model="newStep" data-test="input-new-step" type="text" name="" id="new-step" class="input flex-1 space-y-2" autocomplete="step" spellcheck="false" />
-                        <button type="button" @click="steps.push(newStep.trim()); newStep=''" :disabled="newStep.trim().length === 0" aria-label="Add Step button" data-test="button-add-step">
+                        <button type="button" @click="steps.push({description: newStep.trim(), completed: false}); newStep=''" :disabled="newStep.trim().length === 0" aria-label="Add Step button" data-test="button-add-step">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-code-plus">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M9 12h6" />

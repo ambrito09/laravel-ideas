@@ -28,7 +28,7 @@ class UpdateIdea
       $data['image_path'] = $attributes['image']->store('ideas', 'public');
     }
 
-    $steps = collect($attributes['steps'] ?? [])->map(fn ($step) => ['description' => $step]);
+    $steps = collect($attributes['steps'] ?? [])->map(fn ($step) => ['description' => $step['description'], 'completed' => $step['completed']]);
 
     DB::transaction(function () use ($idea, $data, $steps) {
       $idea->update($data);
