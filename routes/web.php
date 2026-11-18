@@ -14,8 +14,8 @@ Route::redirect('/', '/ideas');
 Route::middleware('auth')->group(function () {
     Route::get('/ideas', [IdeaController::class, 'index'])->name('ideas.index');
     Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.store');
-    Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
-    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
+    Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->name('ideas.show')->can('workWith', 'idea');
+    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->can('workWith', 'idea');
 
     Route::patch('/steps/{step}', [StepController::class, 'update'])->name('steps.update');
 
