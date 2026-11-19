@@ -4,7 +4,7 @@
     <form x-data="{
             status: @js(old('status', $idea->status->value)),
             newLink: '',
-            links: @js(old('links', $idea->links)),
+            links: @js(old('links', $idea->links ?? [])),
             newStep: '',
             steps: @js(old('steps', $idea->steps->map->only(['id', 'description', 'completed']))),
             hasImage: false

@@ -14,7 +14,7 @@ test('logs in a user', function () {
         ->fill('email', 'nuno@laravel.com')
         ->fill('password', 'password')
         ->click('@login-button')
-        ->assertPathIs('/');
+        ->assertPathIs('/ideas');
 
     $this->assertAuthenticated();
 
@@ -36,7 +36,7 @@ test('logs out a user', function () {
 
     visit('/')
         ->click('@logout-button')
-        ->assertPathIs('/');
+        ->assertPathIs('/login');
 
     $this->assertGuest();
 });

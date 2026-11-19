@@ -8,7 +8,7 @@ test('register a user', function () {
         ->fill('email', 'email@testmail.com')
         ->fill('password', 'password')
         ->click('Create Account')
-        ->assertPathIs('/');
+        ->assertPathIs('/ideas');
 
     $this->assertAuthenticated();
 
